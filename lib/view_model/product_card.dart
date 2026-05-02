@@ -9,7 +9,7 @@ class ProductCard extends StatelessWidget {
   const ProductCard({
     super.key,
     required this.product,
-    this.onAddToCart, // Make it optional
+    this.onAddToCart, 
   });
 
   // Formats price for display
@@ -28,7 +28,7 @@ class ProductCard extends StatelessWidget {
     return Card(
       clipBehavior: Clip.antiAlias,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      elevation: 5,
+      elevation: 5, // shadow on backgorund
       color: Colors.white,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,7 +78,7 @@ class ProductCard extends StatelessWidget {
                   Text(
                     'ID: ${product.id}',
                     style: theme.textTheme.bodySmall?.copyWith(
-                      color: Colors.grey[500],
+                      color: const Color.fromARGB(255, 37, 99, 169),
                     ),
                   ),
 
@@ -93,7 +93,7 @@ class ProductCard extends StatelessWidget {
                       icon: const Icon(Icons.add_shopping_cart, size: 18),
                       label: const Text('Add'),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF00ACC1), // Teal
+                        backgroundColor: const Color.fromARGB(255, 3, 75, 85), // Teal
                         foregroundColor: Colors.white,
                         padding: const EdgeInsets.symmetric(
                           horizontal: 10,

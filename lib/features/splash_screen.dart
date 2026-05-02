@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shop/screens/home_screen.dart';
+import 'package:shop/view/home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -28,12 +28,11 @@ class _SplashScreen extends State<SplashScreen>
 
     _animationController.forward();
 
-    _animationController.addStatusListener((status){
-       if(status==AnimationStatus.completed){
+    _animationController.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
         _navigationToNextScreen();
-       }
-    }
-    );
+      }
+    });
   }
 
   @override

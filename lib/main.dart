@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shop/features/splash_screen.dart';
-import 'package:flutter_localizations/flutter_localizations.dart'; // For Persian locale
-import 'package:shop/screens/home_screen.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:shop/provider/cart_provider.dart'; // For Persian locale
+
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => CartProvider(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

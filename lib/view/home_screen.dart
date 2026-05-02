@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:shop/model/product_item.dart';
-import 'package:shop/screens/products_detail_screen.dart';
-import 'package:shop/widgets/product_card.dart'; // For number formatting
+import 'package:shop/view/about_screen.dart';
+import 'package:shop/view/basket_screen.dart';
+import 'package:shop/view/products_detail_screen.dart';
+import 'package:shop/view_model/product_card.dart';
+ 
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -30,8 +33,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // Function to handle adding items to the cart
   void _handleAddToCart(ProductItem product) {
-    // In a real app, you'd manage quantity here or in a separate cart state.
-    // For this example, we'll just add the product once.
     setState(() {
       _cartItems.add(product);
     });
@@ -53,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-
+      
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor, // White background
       appBar: AppBar(
@@ -63,23 +64,50 @@ class _HomeScreenState extends State<HomeScreen> {
         elevation: 0,
         centerTitle: true,
         actions: [
-          // Cart Icon Button
-          IconButton(
-            icon: const Icon(Icons.shopping_cart_outlined),
-            tooltip: 'View Cart',
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text(
-                    'Cart functionality not fully implemented yet!',
+          PopupMenuButton<String>(
+            icon: const Icon(Icons.menu_rounded),
+            onSelected: (value) {
+              if (value == 'about') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const AboutScreen()),
+                );
+              }
+
+              if (value == 'payment') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const BasketScreen(),
                   ),
-                  duration: Duration(seconds: 1),
-                ),
-              );
-              print('Cart tapped. Items in cart: ${_cartItems.length}');
+                );
+              }
             },
+            itemBuilder: (context) => [
+              const PopupMenuItem<String>(
+                value: 'about',
+                child: Row(
+                  children: [
+                    Icon(Icons.account_box_outlined, color: Colors.blueAccent),
+                    SizedBox(width: 8),
+                    Text('About'),
+                  ],
+                ),
+              ),
+
+              const PopupMenuItem<String>(
+                value: 'payment',
+                child: Row(
+                  children: [
+                    Icon(Icons.shopify_sharp, color: Colors.blueAccent),
+                    SizedBox(width: 8),
+                    Text('Payment'),
+                  ],
+                ),
+              ),
+            ],
           ),
-          const SizedBox(width: 10), // Spacing
+          const SizedBox(width: 10), // فاصله بعد
         ],
       ),
       body: Padding(

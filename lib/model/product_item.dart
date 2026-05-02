@@ -4,6 +4,7 @@ class ProductItem {
   final int id;
   final String name;
   final double price;
+  double numbersOfProduct;
   final String imagePath;
   final String description; // Added description for details page
 
@@ -11,6 +12,7 @@ class ProductItem {
     required this.id,
     required this.name,
     required this.price,
+     this.numbersOfProduct=1.0,
     required this.imagePath,
     this.description = 'No description available.', // Default description
   });
@@ -21,6 +23,7 @@ class ProductItem {
       'id': id,
       'name': name,
       'price': price,
+      'numbersOfproduct':numbersOfProduct,
       'imagePath': imagePath,
       'description': description,
     };
@@ -32,6 +35,7 @@ class ProductItem {
       id: map['id'] as int,
       name: map['name'] as String,
       price: (map['price'] as num).toDouble(),
+      numbersOfProduct: (map['numbersOfProduct']as num).toDouble(),
       imagePath: map['imagePath'] as String,
       description: map['description'] as String? ?? 'No description available.',
     );
@@ -44,6 +48,7 @@ class ProductItem {
     double? price,
     String? imagePath,
     String? description,
+    double? numbersOfProduct
   }) {
     return ProductItem(
       id: id ?? this.id,
@@ -51,8 +56,10 @@ class ProductItem {
       price: price ?? this.price,
       imagePath: imagePath ?? this.imagePath,
       description: description ?? this.description,
+      numbersOfProduct:numbersOfProduct ?? this.numbersOfProduct,
     );
   }
+
 }
 
 // Example of using unmodifiable list (optional, for safety)

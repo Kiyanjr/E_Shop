@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shop/model/product_item.dart';
-import 'package:intl/intl.dart'; // formatting numbers
+import 'package:intl/intl.dart';
+import 'package:shop/provider/cart_provider.dart';
+import 'package:shop/view/basket_screen.dart'; // formatting numbers
 
 class ProductDetailScreen extends StatefulWidget {
   final ProductItem product;
@@ -75,7 +78,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   ),
                 ),
               ),
-              // Removed the additional image carousel part
 
               const SizedBox(height: 20),
 
@@ -158,7 +160,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               Text(
                 widget.product.description,
                 style: theme.textTheme.bodyMedium?.copyWith(
-                  color: const Color(0xFF37474F).withOpacity(0.8),
+                  color: const Color.fromARGB(255, 37, 95, 124).withOpacity(0.8),
                   height: 1.5, // Line spacing
                 ),
               ),
@@ -182,8 +184,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     ),
                   ),
                   onPressed: () {
-                    final cartItem = widget.product.copyWith(); // No quantity needed in the product itself for this example
-                    widget.onAddToCart(cartItem); // Call the callback
+                    final cartItem = widget.product.copyWith(numbersOfProduct: 1); // No quantity needed in the product itself for this example
+                       context.read<CartProvider>().adddToCart(cartItem);
 
                     // Show a confirmation snackbar
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -193,6 +195,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         backgroundColor: Colors.green,
                       ),
                     );
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => BasketScreen(),));
                   },
                 ),
               ),

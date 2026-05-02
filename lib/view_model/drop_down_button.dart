@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shop/screens/about_screen.dart';
+import 'package:shop/view/about_screen.dart';
 
 class MyDropdownMenu extends StatefulWidget {
   const MyDropdownMenu({super.key});

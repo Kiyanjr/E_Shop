@@ -2,12 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop/features/splash_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:shop/provider/cart_provider.dart'; // For Persian locale
+import 'package:shop/provider/cart_provider.dart';
+import 'package:shop/provider/user_provider.dart';
+import 'package:shop/view/login_screen.dart'; // For Persian locale
 
-void main() {
+Future<void> main() async {
+   WidgetsFlutterBinding.ensureInitialized();
+    final userProvider = UserProvider();
+      await userProvider.loadUser();
   runApp(
-    ChangeNotifierProvider(
-      create: (_) => CartProvider(),
+    MultiProvider(
+      providers: [
+   ChangeNotifierProvider(create: (context) => CartProvider()),
+   ChangeNotifierProvider(create: (context) => UserProvider()..loadUser()),
+      ],
       child: const MyApp(),
     ),
   );
@@ -71,16 +79,13 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: const SplashScreen(),
-      localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: const [
-        Locale('en', 'US'), // English locale
-      ],
-      locale: const Locale('en', 'US'), // Set default locale to English
+ home: Consumer<UserProvider>(
+        builder: (context, user, child) {
+          return user.username.isEmpty
+              ? const LoginScreen()
+              : const SplashScreen(); 
+        }
+ ),
     );
   }
 }

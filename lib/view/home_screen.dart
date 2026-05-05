@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:shop/model/product_item.dart';
+import 'package:shop/provider/user_provider.dart';
 import 'package:shop/view/about_screen.dart';
 import 'package:shop/view/basket_screen.dart';
 import 'package:shop/view/products_detail_screen.dart';
+import 'package:shop/view/profile_screen.dart';
 import 'package:shop/view_model/product_card.dart';
  
 
@@ -54,11 +57,15 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-      
+       final userName = Provider.of<UserProvider>(context).username;
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor, // White background
       appBar: AppBar(
-        title: const Text('TechLand'),
+        title: Row(
+          children: [
+           const Text('TechLand')
+          ],
+        ),
         backgroundColor: Colors.white,
         foregroundColor: const Color.fromARGB(255, 40, 152, 208),
         elevation: 0,
@@ -82,6 +89,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 );
               }
+              if(value=='profile'){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileScreen()),);
+              }
             },
             itemBuilder: (context) => [
               const PopupMenuItem<String>(
@@ -102,6 +112,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     Icon(Icons.shopify_sharp, color: Colors.blueAccent),
                     SizedBox(width: 8),
                     Text('Payment'),
+                  ],
+                ),
+              ),
+              const PopupMenuItem<String>(
+                value: 'profile',
+                child: Row(
+                  children: [
+                    Icon(Icons.person,color: Colors.blueAccent,),
+                    SizedBox(width: 8,),
+                    Text('Profile')
                   ],
                 ),
               ),

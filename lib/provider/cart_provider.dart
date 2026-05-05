@@ -25,7 +25,6 @@ class CartProvider extends ChangeNotifier {
   }
 
   void removeFromCart(ProductItem productId) {
-    // ignore: unrelated_type_equality_checks
     _items.removeWhere((p) => p.id == productId);
     notifyListeners();
   }

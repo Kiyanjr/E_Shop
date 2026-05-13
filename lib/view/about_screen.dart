@@ -19,7 +19,7 @@ class AboutScreen extends StatelessWidget {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Color(0xFFE0F7FA), // light smooth blue
+              Color(0xFFE0F7FA), // light smooلth blue
               Colors.white,
             ],
           ),

@@ -2,7 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop/provider/user_provider.dart';
-import 'package:shop/view_model/glassinput.dart';
+import 'package:shop/widgets/glassinput.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});

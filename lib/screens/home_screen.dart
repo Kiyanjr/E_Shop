@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 import 'package:shop/model/product_item.dart';
-import 'package:shop/provider/user_provider.dart';
-import 'package:shop/view/about_screen.dart';
-import 'package:shop/view/basket_screen.dart';
-import 'package:shop/view/products_detail_screen.dart';
-import 'package:shop/view/profile_screen.dart';
-import 'package:shop/view_model/product_card.dart';
+import 'package:shop/screens/about_screen.dart';
+import 'package:shop/screens/basket_screen.dart';
+import 'package:shop/screens/products_detail_screen.dart';
+import 'package:shop/screens/profile_screen.dart';
+import 'package:shop/widgets/product_card.dart';
  
 
 class HomeScreen extends StatefulWidget {
@@ -57,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-       final userName = Provider.of<UserProvider>(context).username;
+      // final userName = Provider.of<UserProvider>(context).username;
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor, // White background
       appBar: AppBar(

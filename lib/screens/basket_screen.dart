@@ -1,5 +1,3 @@
-import 'dart:ffi' hide Size;
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -134,7 +132,7 @@ class BasketScreen extends StatelessWidget {
                     style: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
-                      color: Color(0xFF00ACC1), 
+                      color: Color(0xFF00ACC1),
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -150,7 +148,10 @@ class BasketScreen extends StatelessWidget {
                         ),
                         padding: EdgeInsets.zero,
                         constraints: const BoxConstraints(),
-                        onPressed: () => cart.changeQuantity(product.id, product.numbersOfProduct - 1),
+                        onPressed: () => cart.changeQuantity(
+                          product.id,
+                          product.numbersOfProduct - 1,
+                        ),
                       ),
                       const SizedBox(width: 8),
                       Text(
@@ -170,7 +171,7 @@ class BasketScreen extends StatelessWidget {
                         padding: EdgeInsets.zero,
                         constraints: const BoxConstraints(),
                         onPressed: () => cart.changeQuantity(
-                          product.id  ,
+                          product.id,
                           product.numbersOfProduct + 1,
                         ),
                       ),
@@ -183,8 +184,11 @@ class BasketScreen extends StatelessWidget {
             // Delete button
             GestureDetector(
               onTap: () {
-               
-                _showDeleteConfirmationDialog(context, product.id as String, cart);
+                _showDeleteConfirmationDialog(
+                  context,
+                  product.id as String,
+                  cart,
+                );
               },
               child: const Padding(
                 padding: EdgeInsets.all(4.0),
@@ -243,7 +247,7 @@ class BasketScreen extends StatelessWidget {
           // pay button
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF00ACC1), 
+              backgroundColor: const Color(0xFF00ACC1),
               foregroundColor: Colors.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
@@ -254,12 +258,9 @@ class BasketScreen extends StatelessWidget {
             onPressed: cart.items.isEmpty
                 ? null
                 : () {
-                    
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (_) => PaymentScreen(),
-                      ), 
+                      MaterialPageRoute(builder: (_) => PaymentScreen()),
                     );
                   },
             child: const Text(
@@ -286,9 +287,7 @@ class BasketScreen extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
           ),
           title: const Text('Deleting the selected item'),
-          content: const Text(
-            'Are you sure?',
-          ),
+          content: const Text('Are you sure?'),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(dialogContext),
@@ -317,6 +316,3 @@ class BasketScreen extends StatelessWidget {
     );
   }
 }
-
-
-
